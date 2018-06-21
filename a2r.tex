@@ -75,11 +75,177 @@ The major improvements are listed as follows:
 }
 
 \comment{4.- I think whole section 4 should be improved, since readability is a bit difficult at some points. In general, I'd suggest a careful read and rewrite of the core parts. }
-\comment{Algorithm 3, line 1: I think the +2 in rows should be explained; so far I missed it. This reminds me that the Winograd transformation could be improved/increased a bit. I know it's somewhere else, but it would help making the paper a bit more self-contained.  }
+\comment{-Algorithm 3, line 1: I think the +2 in rows should be explained; so far I missed it. This reminds me that the Winograd transformation could be improved/increased a bit. I know it's somewhere else, but it would help making the paper a bit more self-contained.  }
 
 \answer{Thanks for your comments. We add some comments to the pseudo code. \\
 }
-\rev{We add comments in the Algorithm 3 to make the pseudo code easier to understand. In fact, the +2 in rows is resulted from Winograd transformation. At line 7, the +2 in col is also resulted from Winograd, and we add comment for line 7 similarity.}
+\rev{We add comments in the Algorithm 3 to make the pseudo code easier to understand. In fact, the +2 in rows is resulted from Winograd transformation. Similarity at line 7, the +2 in col is also resulted from Winograd, and we add comment for line 7.}
+
+
+\comment{- subsection 4.2 could gain a lot from a more careful description, probably with some other figures that depict the process in several steps/figures. It's one of the core parts of the paper, so I think a lot should go in here, page 11 in particular.}
+
+\answer{Thanks for your advice. The cross-layer scheduling method is indeed difficult to describe because it contains many steps. We add a more careful description with several figures to explain the cross-layer scheduling method. \\
+}
+\rev{We have redrawn fig 5 to illustrate each step of a example CNN with only two layers. We also have changed the paragraphs describing this example.}
+Furthermore, this example is also used in the instruction section(Section 5).
+
+\comment{- subsection 4.3: the same as before, core paragraphs in page 12 should be reviewed and rewritten. The two sentences right before the last paragraph of the section "The instruction is ..." and "The function of each field..." look like they don't belong there, but before in the text. This situation happens 2 or 3 more times in the paper: explanations "afterwards" help understanding previous ideas, which shouldn't be the case (for instance in sub-sections 5.3 and 5.4, among some other or two). 
+}
+\answer{Thanks for your comments. We have rewritten section 4.3  in old revision. We also rearranged subsection 5.3 and 5.4.\\}
+\rev{We have moved subsection 4.3 to a new section(Section 6), and have rewritten all the section with more detials and two code examples for the examples in fig 5. We have merged subsection 5.3, 5.4 and 5.5 to discribe the key idea of our data buffer design.}
+
+\comment{5.- Fig4: probably a Conv8 layer missing in the figure? }
+\answer{Thanks for your comments. We missed Conv8}
+\rev{We have rewritten this figure and fixed this error.}
+
+\comment{6.- Authors claim their proposal is more flexible, which so far seems fair and I agree. However, everything is hardcoded in the design, as kernel sizes, for example, which is something seen at first. Although kernels in particular don't change size a lot among networks, I think this claim could be backed with some of sort of table in which authors compare their work with others in terms of flexibility (or the lack of) for a set of comparable items (not only kernel sizes as I said) among CNN implementations/design flows. }
+\answer{Thanks for your comments. We missed Conv8}
+
+\comment{7.- Fig8: in eq (1), d is the conv kernel and g the input tile, however, it seems to me they are changed in this figure (or in the equation). Please check.  }
+\answer{Thanks for your comments. We mistook the symbols in eq (1)}
+\rev{We have corrected this error.}
+
+\comment{8.- Section 6: authors propose some optimizations and redesigns of some networks/models, claiming, in essence, that accuracy is un-affected without showing evidences. Some of these are solved in the results/experiments section. I would like to see, for every claim like this, something like "as will be demonstrated in section X" or "as it was previously demonstrated by work [xy]". Also, terms like "comparable accuracy" and the like, should be kept at a minimum and be quantified as soon as possible in a scientific paper. }
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+
+\comment{9.- Section 7.1. The description of Table 3 could be improved, as it is not easy to grasp what authors want to convey easily with text as is. It is important for these kind of situations to clearly direct the reader to where the author is thinking, in a kind of step-by-step guide, literally: "as shown in row 3 of the table..." "as upper rows to this show..." and the like. This make reading and understanding much faster. }
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{10.- What about improving Table 5 with accuracy results also? And do some comments on it, along the other efficiency figures discussed? }
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{-In general, the discussion on results in Section 7 could be improved to explain (and interpret) a bit more slowly the obtained results. Besides, I would like to see a deeper review of the state of the art, since I think there are works worth to be considered. Also, some of these might well go into Table 5. A (not thorough set of works):
+} \\
+\begin{itemize}
+\item Improving the Performance of OpenCL-based FPGA Accelerator for Convolutional Neural Network, Jialiang Zhang and Jing Li, FPGA 2017
+\item An OpenCL Deep Learning Accelerator on Arria 10, Utku Aydonat et. al., FPGA 2017
+\item Deep Convolutional Neural Network Architecture With Reconfigurable Computation Patterns, Fengbin Tu et. al., IEEE TRANSACTIONS ON VERY LARGE SCALE INTEGRATION (VLSI) SYSTEMS
+\item Accelerating Binarized Convolutional Neural Networks with Software-Programmable FPGAs, Ritchie Zhao et. al., FPGA 2017
+\item From High-Level Deep Neural Models to FPGAs, Hardik Sharma et. al., 2016 49th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO) 
+\end{itemize}
+
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{11.- Finally, I would like authors to clearly state the differences and incremental work done as compared to their own work in FPT 2017 "Instruction Driven Cross-Layer CNN Accelerator with Winograd Transformation on FPGA". This could complement the already good summary of contributions in page 2.}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\reviewer{2}
+
+\comment{This paper proposes an instruction driven accelerator architecture (a form of overlay) for CNNs, which supports layer fusing and winograd optimizations. It proposes an instruction set to describe compute and data transfer operations in CNNs. It also proposes an algorithm for fusing layers, to minimize data transfer, by keeping intermediate feature maps on-chip.\\ 
+Using instruction-driven approach, there is no need to reconfigure/re-compile the FPGA bitstream. A single bitstream can be used to run different CNNs, by compiling different sequences of instructions to run on the FPGA design. Hence, the approach is claimed to be more flexible than prior FPGA accelerator proposals. \\
+The flexibility offered by an instruction-based overlay approach is compelling. However, it seems that the proposal presented in this paper is not very flexible. ). 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{First, the instruction set seems to be quite inflexible. (e.g., relative to prior work (Cambricon[17]). It consists of calculation and data transfer operations (Fig 6, Table 2). The calculation operation is for line 5-6 in algorithm 3, which is specific to 2D winograd fused operations. Is that mean that the instruction set does not support non-winograd operations? How about for layers that could not be fused? There is also no control instructions (which exists in Cambricon ISA), which reduces the expressiveness of the instruction set. There is little detail given in the paper on the instruction set (Section 4.3). Perhaps the addition of a figure showing example programs for different CNNs written in this instruction set (similar in style to Figure 7 in [17]) would provide more insights and articulate the flexibility of the instruction set. The paper also said that the bit-width for the instruction fields are based on hardware design. Again, concrete examples could offer insights, along with explanation how the bit widths are determined based on which particular hardware parameters. ). 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+
+\comment{Second, the hardware architecture proposed seems to be tied to winograd operations (i.e., the PE design depicted in Figure 8 is for winograd). This would limit the applicability of this work to only CNNs that are amenable to Winograd (i.e,. networks with 3x3 convolutions and stride 1). The evaluation uses VGG networks, which are based on 3x3 convolution. In practice, modern CNNs consists of variety of convolution problem sizes (e.g., 1x1, 5x5, 7x7, etc). Would the proposed accelerator architecture be flexible enough to work on such networks? Furthermore, can the proposed approach work for fully connected (FC) layer? It says in section 7.2 that FC layer is done by the CPU, not in the FPGA. Prior work (e.g., Intel’s OpenCL Deep Learning Accelerator [2] uses a set of dot-product PEs on FPGA for both convolution as well as FC layers). Lastly, how are the PEs connected? From Figure 7, it seems that input tile and weight are broadcasted across the PEs. Would this type of broadcast interconnect be scalable to larger designs? 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{Furthermore, there are several shortcomings in the evaluation section. \\
+First, there is typically a tradeoff between generality and customizations. So, one would expect the instruction-set driven approach offers better generality over custom-compiled CNN hardware architectures, but could lose in efficiency since the hardware architecture is not customized for specific CNN target. Evaluation of such tradeoffs (proposed approach vs. customized CNN HW design) would be beneficial. E.g., to answer questions such as: what is the overheads of instructions? How large are the programs for various CNNs? What is the cost of hardware support for the sub-system that handles such instructions? How much overall cost/efficiency/etc overhead relative to customized CNN design (for same precision and platform, in order to be fair. Table 5 compares across different precisions and platforms, making it difficult to extract comparative insights). 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{Second, for the fused layer evaluation, while it is nice to see comparison of TMD fusing vs. non-fused (plain), given that there is already prior work [1] that proposed technique for layer fusing, one would wonder how much benefit TMD offers relative to such prior layer fusion proposal [1]. E.g., perhaps in Table 3, there should be another row to compare [1] against plain and TMD. . 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{Third, for comparison to prior work (section 7.4), I would encourage including Intel’s Deep Learning Inference accelerator (DLIA) [see [2], and a user guide also available at intel.com] in the comparison. While the DLIA is implemented in OpenCL that is parameterized to support generating customized bistream for a given target CNN, it is also programmable through a set of primitives. Akin to instructions, a single bitstream could be reprogrammed by compiling a program comprising of these primitives (if that’s preferable than generating customized bitstream). And, it also supports Winograd. 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{Fourth, the comparison to CPU (section 7.6) seems to be unfair since it is using an older desktop class CPU. Higher end Xeon server CPUs (with vector instructions) offer much more compute density, and it seems to be more fair to compare against. The KU115 device is optimized for compute (e.g., has the most DSPs among the FPGAs in the Kintex Ultrascale family). The Titan X Pascal GPU used is also optimized for compute and not as old as the CPU. Hence, the CPU is unfairly depicted in this evaluation, and the conclusion may change significantly if higher-end more modern CPU with optimized software for it is used. Moreover, in the FPGA evaluation case, since FC layer is done by the CPU, is it really fair to include FPGA-only power? Without the CPU to do the FC layer, the FPGA presented in this paper seems to not able to run the entirety of the object detection application. 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+
+\comment{Fourth, the comparison to CPU (section 7.6) seems to be unfair since it is using an older desktop class CPU. Higher end Xeon server CPUs (with vector instructions) offer much more compute density, and it seems to be more fair to compare against. The KU115 device is optimized for compute (e.g., has the most DSPs among the FPGAs in the Kintex Ultrascale family). The Titan X Pascal GPU used is also optimized for compute and not as old as the CPU. Hence, the CPU is unfairly depicted in this evaluation, and the conclusion may change significantly if higher-end more modern CPU with optimized software for it is used. Moreover, in the FPGA evaluation case, since FC layer is done by the CPU, is it really fair to include FPGA-only power? Without the CPU to do the FC layer, the FPGA presented in this paper seems to not able to run the entirety of the object detection application. \\
+In light of the aforementioned discussion, perhaps the evaluation could be updated to utilize a more appropriate CPU. Or, explicitly state the CPU type and release date, along with relevant experimental setup, when stating the relative efficiency between FPGA and CPU. E.g., “power efficiency of our FPGA object detection system is … 50x of the [Intel Core i7-4790K desktop] CPU platform [from Q2’14]. [Note that this conclusion may substantially change when targeting higher-end more modern CPUs. Also note that to run full object detection, FPGA needs CPU assistance to perform FC layer. The CPU power in such case is not included when calculating FPGA efficiency number.]” 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{Finally, in terms of writing, at the current state, the paper is not well written, and can be challenging to read. There are various typos and grammatical errors. 
+}
+\answer{Thanks for your advice. We have reviewed this paper according to all the comments you list below and make improvements. We have also gone through this paper to check spelling and grammatical errors. We also have invited a much more senior English writer to review and re-organize the language in this article.\\}
+
+\reviewer{3}
+
+\comment{This paper introduces an FPGA-based accelerator design for running CNN inference. The proposed design features a cross-layer scheduling strategy, a Winograd unit, and a corresponding instruction set design. The authors also emphasize the effect of using the proposed TMD algorithm and evaluate the proposed work on VGG and a detection network with the comparisons among previous FPGA work and GPU-based solutions.  
+}
+
+\comment{1) I notice the authors have published a conference paper in FPT'17 titled “Instruction Driven Cross-Layer CNN Accelerator with Winograd Transformation on FPGA” with a very similar topic and content. The improvements or modifications (algorithms and experiments) from the conference paper should be appropriately highlighted, so that these papers can be distinguished.   
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{2) The novelty and contribution of this paper need to be highlighted. Although there are three contributions mentioned in Sec. 1, two out of three are somewhat unsatisfactory. The first contribution has published in the FPT’17 paper while the second one is briefly mentioned in Sec. 4.3 without specific descriptions.  The third one may provide the differences compared to the conference paper, but the authors fail to enhance this part in motivation (Sec. 3.2) and it only contains little content (Sec. 7.5 and 7.6).  
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+
+\comment{3) Another problem is the presentation which causes this paper difficult to read and understand some times. Grammatical mistakes and typos are recurring issues.
+}
+\begin{itemize}
+    \item For example, in the last paragraph of Sec. 4.1, 3 out of 4 sentences have issues. The 1st sentence: "Our DFS network divide...and add this layer to the current subnetwork." 
+\item The 3rd sentence: "Recurrently doing the DFS search...the DFS network dividing method finishes." 
+\item The last one: missing final punctuation. 
+\item Similar mistakes can be found on the 1st paragraph of page 11 "the size of...", the 2nd paragraph of page 12, etc. 
+\item Sec. 7.5, "tow" should be "two" … 
+\item In conclusion: implement a obeject.. 
+    \end{itemize}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{More detailed comments include: \\
+4) Motivation is not well explained. It should cover the reason for using instruction driven solution, cross-layer strategy, and why the authors target detection networks. 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{5) Fig.2 is confusing. As a workflow, it should contain explicit steps of the proposed flow, such as indicating what are the inputs and outputs, what are the procedures in each stage, etc. 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{6) In Sec. 4.1, paragraph 3, the on-chip memory size of a real FPGA should be mentioned. 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{7) Regarding Equation 6, what is the purpose of minimizing the DT?  Is this approach equivalent to maximize the performance (throughput? or latency?) of CNN accelerator? More discussions are needed. 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{8) In Sec. 4.2, paragraph 6, the authors need to mention the type of CONV, e.g., the kernel size, and the stride. 
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
+
+\comment{9) In Sec. 4.3, the proposed instruction set is not adequately described. How to parse the input CNNs and convert them into instructions?  How to achieve the collaborative design of the FPGA-based accelerator and prove that it is an instruction-driven design? What is the architecture of the proposed accelerator?
+}
+\answer{Thanks for your comments.}
+\rev{We have corrected this error.}
 
 
 
