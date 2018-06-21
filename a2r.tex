@@ -22,7 +22,7 @@
 \newcommand{\rev}[1]{{{\color[rgb]{0,0,1}{#1}}}}
 \newcommand{\reviewer}[1]{\section*{Reviewer #1}}
 \newcommand{\answer}[1]{\noindent\textbf{Answer:} #1}
-\newcommand{\comment}[1]{\noindent\textbf{#1}\\}
+\newcommand{\comment}[1]{\noindent\textbf{\\ #1}\\}
 
 
 \title{Answer to Reviewers}
@@ -52,7 +52,8 @@ The major improvements are listed as follows:
 
 \reviewer{1}
 
-This work deals with design and optimization of cross-layer CNN accelerator for FPGAs. Overall, it is a very good and complete work which seems, so far right on the State of the Art. General paper structure, description and results are fine. However, I have some comments I would really appreciate authors to address before publication (this is why I am issuing a 'minor review'). 
+\comment{This work deals with design and optimization of cross-layer CNN accelerator for FPGAs. Overall, it is a very good and complete work which seems, so far right on the State of the Art. General paper structure, description and results are fine. However, I have some comments I would really appreciate authors to address before publication (this is why I am issuing a 'minor review'). 
+}
 
 \comment{1.- First issue in the English language usage. I am not a native speaker but I've been able to find several mistakes, wrongly built sentences and improper uses of punctuation that make the paper difficult to read. I suggest a complete review of this, preferably by a native English speaker, or at least a very thorough and careful review of a very good English 'writer'. I have not few marks in my printed version, but I see no easy way to convey these to authors. However, as I say, a careful revision should suffice.}
 
@@ -60,8 +61,25 @@ This work deals with design and optimization of cross-layer CNN accelerator for 
 
 \comment{2.- There are many terms not properly defined. Although terms like CNN are widely known, other as RCNN, SSD, mAP (for the accuracy in Table 1), "constants" like $S$ in algorithm descriptions, NMS, etc....are not that known to the FPGA community. I kindly suggest authors to please define every term in the paper the first time it appears.}
 
-\answer{I have added the full spelling of each abbreviations when it first appears in this paper, like (RCNN/SSD/NMS). At Section 2, I have added a paragraph to introduce the evaluation of an image detection algorithm. The evaluating indicator is Mean Average Precision(mAP). The $S$ in the code stands for stride. For easiler undertand 
+\answer{We have added the full spelling of each abbreviations when it first appears in this paper.
 }
+\rev{\\In Section 2, we have added the full spelling of RCNN, YOLO and SSD when they first appear. We have added a paragraph to introduce the evaluation of an image detection algorithm. The evaluating indicator is Mean Average Precision(mAP). In Section 4, the $S$ in the code stands for stride. To make it easier to understand, we set the $S$ to 1 in this article.
+}
+
+\comment{3.- Authors report an "instruction"-driven accelerator, showing a work flow in Fig 2. However, I am missing a bit more description/comments on something else than the architecture, optimizations, etc., like for example the compiler/compilation flow, how the instructions shown in Fig2 as a box are generated (is it a source-to-source transformation tool that rewrites the inner loop? is it something else? }
+
+\answer{Thanks for your comments. The fig 2 in old version is a little bit confusing.\\
+}
+\rev{We have now replace the fig.2 in old version with the fig.1 in new version. Because the old fig 2 describes the workflow of this paper, we place the description of our workflow at the beginninng of this article(Section 1).}
+{\\As can be read from new fig 1, the input of this work is the high level network definition rather than the  basic C source. The high level network definition can be the prototxt file in Caffe.
+}
+
+\comment{4.- I think whole section 4 should be improved, since readability is a bit difficult at some points. In general, I'd suggest a careful read and rewrite of the core parts. }
+\comment{Algorithm 3, line 1: I think the +2 in rows should be explained; so far I missed it. This reminds me that the Winograd transformation could be improved/increased a bit. I know it's somewhere else, but it would help making the paper a bit more self-contained.  }
+
+\answer{Thanks for your comments. We add some comments to the pseudo code. \\
+}
+\rev{We add comments in the Algorithm 3 to make the pseudo code easier to understand. In fact, the +2 in rows is resulted from Winograd transformation. At line 7, the +2 in col is also resulted from Winograd, and we add comment for line 7 similarity.}
 
 
 
