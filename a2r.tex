@@ -70,7 +70,7 @@ The major improvements are listed as follows:
 
 \answer{Thanks for your comments. The fig 2 in old version is a little bit confusing.\\
 }
-\rev{We have now replace the fig.2 in old version with the fig.1 in new version. Because the old fig 2 describes the workflow of this paper, we place the description of our workflow at the beginninng of this article(Section 1).}
+\rev{We have now replace the fig.2 in old version with the fig.1 in new version. Because the old fig 2 describes the workflow of this paper, we place the description of our workflow at the beginning of this article(Section 1).}
 {\\As can be read from new fig 1, the input of this work is the high level network definition rather than the  basic C source. The high level network definition can be the prototxt file in Caffe.
 }
 
@@ -99,7 +99,12 @@ Furthermore, this example is also used in the instruction section(Section 5).
 \rev{We have rewritten this figure and fixed this error.}
 
 \comment{6.- Authors claim their proposal is more flexible, which so far seems fair and I agree. However, everything is hardcoded in the design, as kernel sizes, for example, which is something seen at first. Although kernels in particular don't change size a lot among networks, I think this claim could be backed with some of sort of table in which authors compare their work with others in terms of flexibility (or the lack of) for a set of comparable items (not only kernel sizes as I said) among CNN implementations/design flows. }
-\answer{Thanks for your comments. We missed Conv8}
+\answer{Thanks for your comments. Because of the Winograd transformation, the kernel size of convolution is fixed to 3 × 3 and the stride is fiexed to 1. In future work, we may design hardware for Winograd algorithm with different size.\\}
+\rev{We add a paragraph in section 5.2 to show a possible method to do $1 \time 1$ or $5 \time 5$ convolution by $3 \time 3$ convolver.\\}
+\rev{We add a paragraph at the beginning of Section 6 to explain our ISA is designed for cross-layer scheduling and Winograd acceleration. Other the ISAs like CambrianX[15] is designed for various of NN algorithms, such as MLP, CNN and LSTM. Our ISA  is not as flexible as other work, yet our proposed ISA is very simple.\\
+}
+\rev{We add the comments in conclusion section(Section 9) to explain that we may design hardware for Winograd algorithm with different size in future.
+}
 
 \comment{7.- Fig8: in eq (1), d is the conv kernel and g the input tile, however, it seems to me they are changed in this figure (or in the equation). Please check.  }
 \answer{Thanks for your comments. We mistook the symbols in eq (1)}
